@@ -3,6 +3,7 @@ export const {
   toast: Toasts,
   channels: ChannelStore,
   users: UserStore,
+  messages: MessageActions,
   fluxDispatcher: FluxDispatcher,
   React,
 } = common;
