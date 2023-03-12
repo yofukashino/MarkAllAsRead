@@ -1,26 +1,31 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Injector, Logger, common, settings } from "replugged";
+export const {
+  toast: Toasts,
+  channels: ChannelStore,
+  users: UserStore,
+  fluxDispatcher: FluxDispatcher,
+  React,
+} = common;
+import { defaultSettings } from "./lib/consts";
+import { registerSettings } from "./Components/Settings";
+export const PluginLogger = Logger.plugin("MarkAllAsRead");
+export const PluginInjector = new Injector();
+export const SettingValues = await settings.init("Tharki.MarkAllAsRead", defaultSettings);
+import { addListeners, removeListeners } from "./listeners/index";
+import { conditionalMenuItem, foreverMenuItem } from "./Components/MenuItem";
 
-const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
+import { HBCM } from "./lib/HomeButtonContextMenuApi";
 
-export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
-    };
-  }>(webpack.filters.byProps("getChannel"));
+export const start = (): void => {
+  registerSettings();
+  if (SettingValues.get("showForever", defaultSettings.showForever))
+    HBCM.addItem("MarkAllAsRead", foreverMenuItem());
+  else addListeners();
+  HBCM.addItem("MarkAllAsRead", conditionalMenuItem());
+};
 
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
-    });
-  }
-}
-
-export function stop(): void {
-  inject.uninjectAll();
-}
+export const stop = (): void => {
+  HBCM.removeItem("MarkAllAsRead");
+  removeListeners();
+};
+export { Settings } from "./Components/Settings";
