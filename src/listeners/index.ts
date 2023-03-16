@@ -1,11 +1,9 @@
-import { FluxDispatcher } from "../index";
-import { MessageChecker } from "./MessageChecker";
+import { ReadStateStore } from "../lib/requiredModules";
+import { checkReadStates } from "./ReadStateChecker";
 
 export const addListeners = (): void => {
-  FluxDispatcher.subscribe("MESSAGE_CREATE", MessageChecker);
-  FluxDispatcher.subscribe("MESSAGE_ACK", MessageChecker);
+  ReadStateStore.addChangeListener(checkReadStates);
 };
 export const removeListeners = (): void => {
-  FluxDispatcher.unsubscribe("MESSAGE_CREATE", MessageChecker);
-  FluxDispatcher.unsubscribe("MESSAGE_ACK", MessageChecker);
+  ReadStateStore.removeChangeListener(checkReadStates);
 };

@@ -117,6 +117,8 @@ export interface ReadStateStore {
   isNewForumThread: DefaultTypes.AnyFunction;
   lastMessageId: DefaultTypes.AnyFunction;
   lastPinTimestamp: DefaultTypes.AnyFunction;
+  addChangeListener: DefaultTypes.AnyFunction;
+  removeChangeListener: DefaultTypes.AnyFunction;
 }
 export interface Channel {
   defaultAutoArchiveDuration: undefined | number;

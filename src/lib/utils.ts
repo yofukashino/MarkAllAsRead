@@ -5,15 +5,18 @@ import lodash from "lodash";
 import * as Types from "../types";
 
 export const getUnreads = (): Types.Unreads => {
-  const AllReadStates = ReadStateStore.getAllReadStates().map((m) => ({
-    ...m,
-  }));
+  const AllReadStates = ReadStateStore.getAllReadStates();
   const OnlyUnreadOrMentions = AllReadStates.filter((m) =>
     SettingValues.get("onlyMentions", defaultSettings.onlyMentions)
       ? m._mentionCount
       : ReadStateStore.hasUnread(m.channelId),
   );
-
+  if (!OnlyUnreadOrMentions.length)
+    return {
+      DMs: [],
+      GuildChannels: [],
+      All: [],
+    };
   const UnreadDMs = OnlyUnreadOrMentions.filter(
     (m) =>
       ChannelStore.getChannel(m.channelId)?.isDM() &&
