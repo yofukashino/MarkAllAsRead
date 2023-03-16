@@ -28,7 +28,7 @@ export const Settings = () => {
                 AssetUtils.getDefaultAvatarURL(Utils.randomNo(0, 69)),
               ...(Utils.useSetting(
                 SettingValues,
-                `blacklistedGuilds.${guild.id}`,
+                `blacklistedServers.${guild.id}`,
                 false as unknown as string,
               ) as unknown as Types.blacklist),
             }}
