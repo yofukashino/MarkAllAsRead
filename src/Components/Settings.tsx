@@ -5,7 +5,7 @@ import { IconSwitch } from "./IconSwitch";
 import { AssetUtils, GuildStore } from "../lib/requiredModules";
 import * as Utils from "../lib/utils";
 import * as Types from "../types";
-const { Category, SwitchItem, FormText, Divider } = components;
+const { Category, SwitchItem } = components;
 export const registerSettings = (): void => {
   for (const key in defaultSettings) {
     if (SettingValues.has(key as keyof Types.Settings)) return;
@@ -77,16 +77,6 @@ export const Settings = () => {
         }}>
         Show Forever
       </SwitchItem>
-      <FormText.LABEL_BOLD
-        {...{
-          style: {
-            textAlign: "center",
-            paddingBottom: "20px",
-          },
-        }}>
-        Reload Discord for settings to take effect.
-      </FormText.LABEL_BOLD>
-      <Divider />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "mark-all-as-read",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Get an option to mark everything as read by right clicking on the home button.",
   "engines": {
     "node": ">=14.0.0"
