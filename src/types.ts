@@ -169,25 +169,6 @@ export interface Channel {
   getGuildId: () => string;
   isGroupDM: () => boolean;
 }
-export interface ChannelStore {
-  getAllThreadsForParent: DefaultTypes.AnyFunction;
-  getBasicChannel: DefaultTypes.AnyFunction;
-  getCachedChannelJsonForGuild: DefaultTypes.AnyFunction;
-  getChannel: (e: string) => Channel;
-  getDMFromUserId: DefaultTypes.AnyFunction;
-  getDMUserIds: DefaultTypes.AnyFunction;
-  getGuildChannelsVersion: DefaultTypes.AnyFunction;
-  getInitialOverlayState: DefaultTypes.AnyFunction;
-  getMutableBasicGuildChannelsForGuild: DefaultTypes.AnyFunction;
-  getMutableGuildChannelsForGuild: DefaultTypes.AnyFunction;
-  getMutablePrivateChannels: DefaultTypes.AnyFunction;
-  getPrivateChannelsVersion: DefaultTypes.AnyFunction;
-  getSortedPrivateChannels: DefaultTypes.AnyFunction;
-  hasChannel: DefaultTypes.AnyFunction;
-  hasRestoredGuild: DefaultTypes.AnyFunction;
-  initialize: DefaultTypes.AnyFunction;
-  loadAllGuildAndPrivateChannelsFromDisk: DefaultTypes.AnyFunction;
-}
 export interface Guild {
   afkChannelId: null | string;
   afkTimeout: number;
