@@ -167,6 +167,7 @@ export interface Channel {
   isGuildVocal: () => boolean;
   isDM: () => boolean;
   getGuildId: () => string;
+  isGroupDM: () => boolean;
 }
 export interface ChannelStore {
   getAllThreadsForParent: DefaultTypes.AnyFunction;
@@ -287,7 +288,7 @@ export interface AssetUtils {
   getApplicationIconURL: DefaultTypes.AnyFunction;
   getAvatarDecorationURL: DefaultTypes.AnyFunction;
   getChannelIconSource: DefaultTypes.AnyFunction;
-  getChannelIconURL: DefaultTypes.AnyFunction;
+  getChannelIconURL: (Channel: Channel) => string;
   getDefaultAvatarURL: (number: number) => string;
   getEmojiURL: DefaultTypes.AnyFunction;
   getGameAssetSource: DefaultTypes.AnyFunction;

@@ -37,6 +37,23 @@ export const Settings = () => {
       </Category>
       <Category {...{ title: "DM Blacklist", open: false }}>
         {...Object.values(ChannelStore.getSortedPrivateChannels()).map((DM) => {
+          if (DM.isGroupDM())
+            return (
+              <IconSwitch
+                {...{
+                  title: DM.name,
+                  note: DM.rawRecipients.map((m) => m.username).join(","),
+                  icon:
+                    AssetUtils.getChannelIconURL(DM) ??
+                    AssetUtils.getDefaultAvatarURL(Utils.randomNo(0, 69)),
+                  ...(Utils.useSetting(
+                    SettingValues,
+                    `blacklistedDMs.${DM.id}`,
+                    false as unknown as string,
+                  ) as unknown as Types.blacklist),
+                }}
+              />
+            );
           const User = UserStore.getUser(DM.recipients[0]);
           return (
             <IconSwitch

@@ -19,7 +19,8 @@ export const getUnreads = (): Types.Unreads => {
     };
   const UnreadDMs = OnlyUnreadOrMentions.filter(
     (m) =>
-      ChannelStore.getChannel(m.channelId)?.isDM() &&
+      (ChannelStore.getChannel(m.channelId)?.isDM() ||
+        ChannelStore.getChannel(m.channelId)?.isGroupDM()) &&
       !SettingValues.get("blacklistedDMs", defaultSettings.blacklistedDMs)[m.channelId],
   );
   const UnreadGuildChannels = OnlyUnreadOrMentions.filter(
