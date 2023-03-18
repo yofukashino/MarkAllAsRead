@@ -1,6 +1,6 @@
-import { React, SettingValues } from "../index";
+import { ChannelStore, React, SettingValues } from "../index";
 import { defaultSettings } from "./consts";
-import { ChannelStore, ReadStateStore } from "./requiredModules";
+import { ReadStateStore } from "./requiredModules";
 import lodash from "lodash";
 import * as Types from "../types";
 

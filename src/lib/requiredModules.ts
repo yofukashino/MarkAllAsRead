@@ -5,11 +5,6 @@ export const ReadStateStore = webpack.getByProps(
   "getReadStatesByChannel",
 ) as unknown as Types.ReadStateStore;
 
-export const ChannelStore = webpack.getByProps(
-  "getChannel",
-  "getDMFromUserId",
-) as unknown as Types.ChannelStore;
-
 export const AckUtilsModule = webpack.getBySource(
   'type:"BULK_ACK"',
 ) as unknown as Types.GenericModule;
