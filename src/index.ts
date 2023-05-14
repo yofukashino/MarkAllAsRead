@@ -4,7 +4,7 @@ import { defaultSettings } from "./lib/consts";
 import { registerSettings } from "./Components/Settings";
 export const PluginLogger = Logger.plugin("MarkAllAsRead");
 export const PluginInjector = new Injector();
-export const SettingValues = await settings.init("Tharki.MarkAllAsRead", defaultSettings);
+export const SettingValues = await settings.init("dev.tharki.MarkAllAsRead", defaultSettings);
 import { addListeners, removeListeners } from "./listeners/index";
 import { conditionalMenuItem, foreverMenuItem } from "./Components/MenuItem";
 import { HBCM } from "./lib/HomeButtonContextMenuApi";
