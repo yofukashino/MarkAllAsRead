@@ -1,6 +1,6 @@
 {
   "name": "mark-all-as-read",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Get an option to mark everything as read by right clicking on the home button.",
   "engines": {
     "node": ">=14.0.0"
@@ -31,7 +31,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.8.1",
-    "replugged": "^4.2.2",
+    "replugged": "^4.2.6",
     "typescript": "^4.8.4",
     "lodash": "^4.17.21"
   }
