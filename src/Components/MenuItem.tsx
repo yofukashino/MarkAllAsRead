@@ -17,7 +17,7 @@ export const conditionalMenuItem = (): Types.ReactElement | null => {
       {...{
         label: "Mark All as Read",
         id: "mark-all-read",
-        icon: () => Boolean(isSubMenu) || Icons.message("20", "20"),
+        icon: !Boolean(isSubMenu) ? () => Icons.message("20", "20") : null,
         action: () => {
           AckUtils.bulkAck(All);
           Toasts.toast(`Marked All As Read`, Toasts.Kind.SUCCESS);
