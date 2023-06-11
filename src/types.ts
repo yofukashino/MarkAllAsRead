@@ -1,37 +1,11 @@
 import { types as DefaultTypes } from "replugged";
 export { types as DefaultTypes } from "replugged";
-export { ReactElement, ComponentClass, UIEvent } from "react";
+export { ReactElement, ComponentClass, MouseEvent } from "react";
 import { ComponentClass, ReactElement } from "react";
 declare global {
   interface Window {
     HomeButtonContextMenuApi: HomeButtonContextMenuApi;
   }
-}
-export interface ContextMenuArgs {
-  className: string;
-  config: { context: string };
-  context: string;
-  onHeightUpdate: DefaultTypes.AnyFunction;
-  position: null | number;
-  target: HTMLElement;
-  theme: string;
-}
-export interface ExtendedContextMenuArgs extends ContextMenuArgs {
-  onClose: DefaultTypes.AnyFunction;
-}
-export interface ContextMenu {
-  close: DefaultTypes.AnyFunction;
-  open: (
-    event: React.UIEvent,
-    render?: ContextMenu,
-    options?: { enableSpellCheck?: boolean },
-    renderLazy?: Promise<ContextMenu>,
-  ) => void;
-  openLazy: (
-    event: React.UIEvent,
-    renderLazy?: Promise<ContextMenu>,
-    options?: { enableSpellCheck?: boolean },
-  ) => void;
 }
 export interface HomeButtonContextMenuApi {
   items?: Map<string, ReactElement>;
@@ -41,9 +15,7 @@ export interface HomeButtonContextMenuApi {
   forceUpdate?: DefaultTypes.AnyFunction;
   openContextMenu?: DefaultTypes.AnyFunction;
 }
-export interface GenericModule {
-  [key: string]: DefaultTypes.AnyFunction;
-}
+export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
 export interface ReadStateByChannelValue {
   ackMessageIdAtChannelSelect: null | string;
   ackPinTimestamp: number;
@@ -298,6 +270,9 @@ export interface AssetUtils {
   hasAnimatedGuildIcon: DefaultTypes.AnyFunction;
   isAnimatedIconHash: DefaultTypes.AnyFunction;
   makeSource: DefaultTypes.AnyFunction;
+}
+export interface AckUtils {
+  bulkAck: DefaultTypes.AnyFunction;
 }
 export interface Unread {
   channelId: string;

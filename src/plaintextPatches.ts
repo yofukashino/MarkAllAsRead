@@ -4,7 +4,7 @@ export default [
     find: "Messages.DISCODO_DISABLED",
     replacements: [
       {
-        match: /(className:.*\.[\w]+),(children.*"friends-list")/,
+        match: /(className:[\w$_]+\(\)\.[\w]+),(children.+?"friends-list")/,
         replace: `$1,onContextMenu: HomeButtonContextMenuApi?.openContextMenu,$2`,
       },
     ],

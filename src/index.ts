@@ -7,7 +7,7 @@ export const PluginInjector = new Injector();
 export const SettingValues = await settings.init("dev.tharki.MarkAllAsRead", defaultSettings);
 import { addListeners, removeListeners } from "./listeners/index";
 import { conditionalMenuItem, foreverMenuItem } from "./Components/MenuItem";
-import { HBCM } from "./lib/HomeButtonContextMenuApi";
+import HBCM from "./lib/HomeButtonContextMenuApi";
 import { applyInjections } from "./patches/index";
 
 export const start = (): void => {

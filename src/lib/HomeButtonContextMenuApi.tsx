@@ -2,7 +2,7 @@ import { common, components } from "replugged";
 import * as Types from "../types";
 const { contextMenu: ContextMenuApi } = common;
 const {
-  ContextMenu: { ContextMenu, MenuItem },
+  ContextMenu: { ContextMenu },
 } = components;
 class HomeButtonContextMenuApi {
   items: Map<string, Types.ReactElement>;
@@ -16,29 +16,22 @@ class HomeButtonContextMenuApi {
   removeItem(id: string) {
     this.items.delete(id);
   }
-  openContextMenu(event: Types.UIEvent) {
+  openContextMenu(event: Types.MouseEvent) {
     const HomeButtonContextMenuItems = this.items.size
       ? Array.from(this.items.values())
           .filter(Boolean)
           .sort((a, b) => a?.props?.label?.localeCompare(b?.props?.label))
-      : [
-          <MenuItem
-            {...{
-              label: "♫ ⊂(｡◕‿‿◕｡⊂) ♪",
-              id: "no-items",
-            }}
-          />,
-        ];
-    const HomeButtonContextMenu = (props: Types.ExtendedContextMenuArgs) => (
+      : [];
+    const HomeButtonContextMenu = (props) => (
       <ContextMenu {...{ ...props, navId: "tharki" }}>{...HomeButtonContextMenuItems}</ContextMenu>
     );
-    ContextMenuApi.open(event, ((e: Types.ContextMenuArgs) => (
+    ContextMenuApi.open(event, (e) => (
       <HomeButtonContextMenu {...Object.assign({}, e, { onClose: ContextMenuApi.close })} />
-    )) as unknown as Types.ContextMenu);
+    ));
   }
 }
 
-export const HBCM = await new Promise<Types.HomeButtonContextMenuApi>((resolve, reject) => {
+export default await new Promise<Types.HomeButtonContextMenuApi>((resolve, reject) => {
   try {
     if (Object.hasOwnProperty.call(window, "HomeButtonContextMenuApi"))
       resolve(window.HomeButtonContextMenuApi);
