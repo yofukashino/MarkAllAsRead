@@ -3,7 +3,7 @@ import { defaultSettings } from "./lib/consts";
 import { registerSettings } from "./Components/Settings";
 export const PluginLogger = Logger.plugin("MarkAllAsRead");
 export const PluginInjector = new Injector();
-export const SettingValues = await settings.init("dev.tharki.MarkAllAsRead", defaultSettings);
+export const SettingValues = await settings.init("dev.yofukashino.MarkAllAsRead", defaultSettings);
 import Listeners from "./listeners/index";
 import MenuItems from "./Components/MenuItem";
 import HBCM from "./lib/HomeButtonContextMenuApi";

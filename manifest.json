@@ -1,8 +1,8 @@
 {
-  "id": "dev.tharki.MarkAllAsRead",
+  "id": "dev.yofukashino.MarkAllAsRead",
   "name": "MarkAllAsRead",
   "description": "Get an option to mark everything as read by right clicking on the home button.",
-  "image": "https://YofukashiNo.github.io/files-random-host/bdpluginsassets/read.png",
+  "image": "https://i.imgur.com/EniZLUj.png",
   "source": "https://github.com/YofukashiNo/MarkAllAsRead",
   "author": {
     "name": "Nanakusa",
