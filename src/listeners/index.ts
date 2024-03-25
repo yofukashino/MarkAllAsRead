@@ -8,4 +8,4 @@ export const removeListeners = (): void => {
   ReadStateStore.removeChangeListener(checkReadStates);
 };
 
-export default {addListeners, removeListeners}
+export default { addListeners, removeListeners };
