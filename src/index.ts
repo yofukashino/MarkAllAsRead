@@ -1,30 +1,29 @@
-import { Injector, Logger, common, settings } from "replugged";
-export const { toast: Toasts, channels: ChannelStore, users: UserStore, React } = common;
+import { Injector, Logger, settings } from "replugged";
 import { defaultSettings } from "./lib/consts";
 import { registerSettings } from "./Components/Settings";
 export const PluginLogger = Logger.plugin("MarkAllAsRead");
 export const PluginInjector = new Injector();
 export const SettingValues = await settings.init("dev.tharki.MarkAllAsRead", defaultSettings);
-import { addListeners, removeListeners } from "./listeners/index";
-import { conditionalMenuItem, foreverMenuItem } from "./Components/MenuItem";
+import Listeners from "./listeners/index";
+import MenuItems from "./Components/MenuItem";
 import HBCM from "./lib/HomeButtonContextMenuApi";
-import { applyInjections } from "./patches/index";
+import Injections from "./patches/index";
 
 export const start = (): void => {
   registerSettings();
-  HBCM.addItem(
+  HBCM.getAPI().addItem(
     "MarkAllAsRead",
     SettingValues.get("showForever", defaultSettings.showForever)
-      ? foreverMenuItem()
-      : conditionalMenuItem(),
+      ? MenuItems.foreverMenuItem()
+      : MenuItems.conditionalMenuItem(),
   );
-  if (!SettingValues.get("showForever", defaultSettings.showForever)) addListeners();
-  applyInjections();
+  if (!SettingValues.get("showForever", defaultSettings.showForever)) Listeners.addListeners();
+  Injections.applyInjections();
 };
 
 export const stop = (): void => {
-  HBCM.removeItem("MarkAllAsRead");
-  removeListeners();
+  HBCM.getAPI().removeItem("MarkAllAsRead");
+  Listeners.removeListeners();
   PluginInjector.uninjectAll();
 };
 export { Settings } from "./Components/Settings";

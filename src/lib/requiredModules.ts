@@ -1,14 +1,15 @@
 import { webpack } from "replugged";
-import * as Types from "../types";
+import Types from "../types";
 
 export const ReadStateStore = webpack.getByProps<Types.ReadStateStore>("getReadStatesByChannel");
 
-export const AckUtilsModule = webpack.getBySource<Types.GenericModule>('type:"BULK_ACK"');
-
-export const AckUtils = {
-  bulkAck: webpack.getFunctionBySource(AckUtilsModule, 'type:"BULK_ACK"'),
-} as Types.AckUtils;
+export const AckUtils = webpack.getByProps<Types.AckUtils>("bulkAck", "ack");
 
 export const GuildStore = webpack.getByProps<Types.GuildStore>("getGuild", "getGuilds");
 
-export const AssetUtils = webpack.getByProps<Types.AssetUtils>("getUserAvatarURL");
+export const IconUtils = webpack.getByProps<Types.IconUtils>("getUserAvatarURL");
+
+export const DiscordComponents = webpack.getByProps<Types.DiscordComponents>(
+  "PopoutList",
+  "AdvancedScrollerAuto",
+);

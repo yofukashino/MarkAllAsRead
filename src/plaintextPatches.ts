@@ -1,11 +1,12 @@
-import * as Types from "./types";
+import Types from "./types";
 export default [
   {
     find: "Messages.DISCODO_DISABLED",
     replacements: [
       {
-        match: /(className:[\w$_]+\(\)\.[\w]+),(children.+?"friends-list")/,
-        replace: `$1,onContextMenu: HomeButtonContextMenuApi?.openContextMenu,$2`,
+        match: /},(children.{40,52}?"friends-list")/,
+        replace: (_, suffix: string) =>
+          `},onContextMenu: window.HomeButtonContextMenuApi?.openContextMenu,${suffix}`,
       },
     ],
   },

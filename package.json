@@ -1,7 +1,7 @@
 {
-  "name": "mark-all-as-read",
-  "version": "1.0.2",
-  "description": "Get an option to mark everything as read by right clicking on the home button.",
+  "name": "show-hidden-channels",
+  "version": "1.1.0",
+  "description": "A replugged plugin which displays all hidden Channels, which can't be accessed due to Role Restrictions, this won't allow you to read them (impossible).",
   "engines": {
     "node": ">=14.0.0"
   },
@@ -9,30 +9,32 @@
     "build": "replugged build plugin",
     "watch": "replugged build plugin --watch",
     "bundle": "replugged bundle plugin",
+    "release": "replugged release",
     "check": "tsc --noEmit",
     "prettier:check": "prettier ./src --check",
     "eslint:check": "eslint ./src",
     "prettier:fix": "prettier ./src --write",
     "eslint:fix": "eslint ./src --fix",
-    "lint": "pnpm run prettier:check && pnpm run eslint:check && pnpm run check",
+    "lint": "pnpm run prettier:check & pnpm run eslint:check & pnpm run check",
     "lint:fix": "pnpm run prettier:fix && pnpm run eslint:fix"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Nanakusa",
+  "license": "MIT",
   "devDependencies": {
-    "@types/lodash": "^4.14.195",
-    "@types/node": "^18.16.17",
-    "@types/react": "^18.2.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.9",
-    "@typescript-eslint/parser": "^5.59.9",
-    "eslint": "^8.42.0",
+    "@types/node": "^18.18.6",
+    "@types/react": "^18.2.31",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.52.0",
     "eslint-config-dmitmel": "github:dmitmel/eslint-config-dmitmel",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-react": "^7.32.2",
-    "lodash": "^4.17.21",
+    "eslint-plugin-react": "^7.33.2",
     "prettier": "^2.8.8",
-    "replugged": "^4.4.1",
-    "typescript": "^4.9.5"
+    "replugged": "^4.7.7",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "discord-types": "^1.3.3"
   }
 }

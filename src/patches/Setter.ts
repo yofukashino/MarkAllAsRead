@@ -1,18 +1,18 @@
 import { PluginInjector, SettingValues } from "../index";
 import { defaultSettings } from "../lib/consts";
-import { addListeners, removeListeners } from "../listeners/index";
-import { conditionalMenuItem, foreverMenuItem } from "../Components/MenuItem";
+import Listeners from "../listeners/index";
+import MenuItems from "../Components/MenuItem";
 import HBCM from "../lib/HomeButtonContextMenuApi";
-export const patchSettingSetter = (): void => {
+export default (): void => {
   PluginInjector.after(SettingValues, "set", () => {
-    HBCM.removeItem("MarkAllAsRead");
-    removeListeners();
-    HBCM.addItem(
+    HBCM.getAPI().removeItem("MarkAllAsRead");
+    Listeners.removeListeners();
+    HBCM.getAPI().addItem(
       "MarkAllAsRead",
       SettingValues.get("showForever", defaultSettings.showForever)
-        ? foreverMenuItem()
-        : conditionalMenuItem(),
+        ? MenuItems.foreverMenuItem()
+        : MenuItems.conditionalMenuItem(),
     );
-    if (!SettingValues.get("showForever", defaultSettings.showForever)) addListeners();
+    if (!SettingValues.get("showForever", defaultSettings.showForever)) Listeners.addListeners();
   });
 };
