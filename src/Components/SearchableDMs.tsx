@@ -4,13 +4,11 @@ import {
   channels as UltimateChannelStore,
   users as UltimateUserStore,
 } from "replugged/common";
-import { DiscordComponents, IconUtils } from "../lib/requiredModules";
+import Modules from "../lib/requiredModules";
 import IconSwitch from "./IconSwitch";
 import Utils from "../lib/utils";
 import Types from "../types";
-const {
-  PopoutList: { SearchBar, Divider },
-} = DiscordComponents;
+
 export default <
   T extends Record<string, Types.Jsonifiable>,
   D extends keyof T,
@@ -22,6 +20,12 @@ export default <
   SettingManager: settings.SettingsManager<T, D>;
   path: `${K}.${string}` | K;
 }) => {
+  const {
+    DiscordComponents: {
+      PopoutList: { SearchBar, Divider },
+    },
+    IconUtils,
+  } = Modules;
   const [searchValue, setSearchValue] = React.useState([]);
   const filteredGuildsWithState = Object.values(UltimateChannelStore.getSortedPrivateChannels())
     .map((Channel: Types.Channel) =>

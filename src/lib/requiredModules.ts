@@ -1,15 +1,19 @@
 import { webpack } from "replugged";
 import Types from "../types";
 
-export const ReadStateStore = webpack.getByProps<Types.ReadStateStore>("getReadStatesByChannel");
+export const Modules: Types.Modules = {};
 
-export const AckUtils = webpack.getByProps<Types.AckUtils>("bulkAck", "ack");
+Modules.loadModules = async (): Promise<void> => {
+  Modules.ReadStateStore ??= await webpack.waitForProps<Types.ReadStateStore>(
+    "getReadStatesByChannel",
+  );
+  Modules.AckUtils ??= await webpack.waitForProps<Types.AckUtils>("bulkAck", "ack");
+  Modules.GuildStore ??= await webpack.waitForProps<Types.GuildStore>("getGuild", "getGuilds");
+  Modules.IconUtils ??= await webpack.waitForProps<Types.IconUtils>("getUserAvatarURL");
+  Modules.DiscordComponents ??= await webpack.waitForProps<Types.DiscordComponents>(
+    "PopoutList",
+    "AdvancedScrollerAuto",
+  );
+};
 
-export const GuildStore = webpack.getByProps<Types.GuildStore>("getGuild", "getGuilds");
-
-export const IconUtils = webpack.getByProps<Types.IconUtils>("getUserAvatarURL");
-
-export const DiscordComponents = webpack.getByProps<Types.DiscordComponents>(
-  "PopoutList",
-  "AdvancedScrollerAuto",
-);
+export default Modules;

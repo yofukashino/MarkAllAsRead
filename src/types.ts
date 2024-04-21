@@ -1,4 +1,5 @@
 import { types } from "replugged";
+import { Store } from "replugged/dist/renderer/modules/common/flux";
 import GeneralDiscordTypes from "discord-types/general";
 import type HBCM from "./lib/HomeButtonContextMenuApi";
 export namespace Types {
@@ -118,7 +119,7 @@ export namespace Types {
     _mentionCount: number;
     _persisted: boolean;
   }
-  export interface ReadStateStore {
+  export interface ReadStateStore extends Store {
     ackMessageId: DefaultTypes.AnyFunction;
     getAllReadStates: () => AllReadStates[];
     getForDebugging: DefaultTypes.AnyFunction;
@@ -222,6 +223,14 @@ export namespace Types {
     ScrollerNone: React.ComponentClass;
     ScrollerThin: React.ComponentClass;
   }
+  export interface Modules {
+    loadModules?: () => Promise<void>;
+    ReadStateStore?: ReadStateStore;
+    AckUtils?: AckUtils;
+    GuildStore?: GuildStore;
+    IconUtils?: IconUtils;
+    DiscordComponents?: DiscordComponents;
+  }
   export type Jsonifiable =
     | null
     | undefined
@@ -235,7 +244,10 @@ export namespace Types {
     | React.ChangeEvent<HTMLInputElement>
     | (Record<string, unknown> & { value?: T; checked?: T });
 
-  export type NestedType<T, P> = P extends `${infer Left}.${infer Right}`
+  export type NestedType<T, P> = P extends
+    | `${infer Left}.${infer Right}`
+    | `${infer Left}/${infer Right}`
+    | `${infer Left}-${infer Right}`
     ? Left extends keyof T
       ? NestedType<T[Left], Right>
       : Left extends `${infer FieldKey}[${infer IndexKey}]`
@@ -416,7 +428,9 @@ declare global {
       setLearnedWords: Types.DefaultTypes.AnyFunction;
       setLocale: Types.DefaultTypes.AnyFunction;
     };
-    thumbar: { setThumbarButtons: Types.DefaultTypes.AnyFunction };
+    thumbar: {
+      setThumbarButtons: Types.DefaultTypes.AnyFunction;
+    };
     userDataCache: {
       cacheUserData: Types.DefaultTypes.AnyFunction;
       deleteCache: Types.DefaultTypes.AnyFunction;

@@ -1,13 +1,14 @@
 import { toast as Toasts } from "replugged/common";
 import { ContextMenu } from "replugged/components";
-import { AckUtils } from "../lib/requiredModules";
+import Modules from "../lib/requiredModules";
 import Icons from "./Icons";
 import Utils from "../lib/utils";
 
 const { MenuItem, MenuGroup } = ContextMenu;
-export const conditionalMenuItem = (): React.ReactElement | null => {
+export const conditionalMenuItem = (): React.ReactElement => {
+  const { AckUtils } = Modules;
   const { DMs, GuildChannels, All } = Utils.getUnreads();
-  if (!All.length) return null;
+  if (!All.length) return <></>;
   const isSubMenu = DMs.length && GuildChannels.length;
   return (
     <MenuItem
@@ -43,7 +44,8 @@ export const conditionalMenuItem = (): React.ReactElement | null => {
     </MenuItem>
   );
 };
-export const foreverMenuItem = (): React.ReactElement | null => {
+export const foreverMenuItem = (): React.ReactElement => {
+  const { AckUtils } = Modules;
   return (
     <MenuItem
       label="Mark All as Read"

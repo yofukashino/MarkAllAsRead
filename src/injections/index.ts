@@ -1,6 +1,6 @@
-import patchSettingSetter from "./Setter";
+import injectSettingSetter from "./Setter";
 export const applyInjections = (): void => {
-  patchSettingSetter();
+  injectSettingSetter();
 };
 
 export default { applyInjections };

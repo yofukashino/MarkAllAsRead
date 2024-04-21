@@ -1,11 +1,11 @@
-import { components, util } from "replugged";
+import { util } from "replugged";
+import { Category, SwitchItem } from "replugged/components";
 import { PluginLogger, SettingValues } from "../index";
 import { defaultSettings } from "../lib/consts";
 import SearchableDMs from "./SearchableDMs";
 import SearchableGuilds from "./SearchableGuilds";
 import Types from "../types";
 
-const { Category, SwitchItem } = components;
 export const registerSettings = (): void => {
   for (const key in defaultSettings) {
     if (SettingValues.has(key as keyof Types.Settings)) return;
@@ -41,3 +41,5 @@ export const Settings = () => {
     </div>
   );
 };
+
+export default { registerSettings, defaultSettings };
