@@ -11,15 +11,17 @@ import Injections from "./injections/index";
 
 export const start = (): void => {
   registerSettings();
-  void Modules.loadModules().then(() => {
-    HBCM.getAPI().addItem(
-      "MarkAllAsRead",
-      SettingValues.get("showForever", defaultSettings.showForever)
-        ? MenuItems.foreverMenuItem
-        : MenuItems.conditionalMenuItem,
-    );
-    Injections.applyInjections();
-  });
+  void Modules.loadModules()
+    .then(() => {
+      HBCM.getAPI().addItem(
+        "MarkAllAsRead",
+        SettingValues.get("showForever", defaultSettings.showForever)
+          ? MenuItems.foreverMenuItem
+          : MenuItems.conditionalMenuItem,
+      );
+      Injections.applyInjections();
+    })
+    .catch((err) => PluginLogger.error(err));
 };
 
 export const stop = (): void => {

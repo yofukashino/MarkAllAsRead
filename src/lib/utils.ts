@@ -1,5 +1,10 @@
 import { settings } from "replugged";
-import { flux as Flux, React, channels as UltimateChannelStore, lodash } from "replugged/common";
+import {
+  fluxHooks as FluxHooks,
+  React,
+  channels as UltimateChannelStore,
+  lodash,
+} from "replugged/common";
 
 import { SettingValues } from "../index";
 import { defaultSettings } from "./consts";
@@ -28,7 +33,7 @@ export const getUnreads = (): Types.Unreads => {
       SettingValues.get("blacklistedServers", defaultSettings.blacklistedServers),
     );
   }, [setBlacklistedServers]);
-  return Flux.useStateFromStores([ReadStateStore], () => {
+  return FluxHooks.useStateFromStores([ReadStateStore], () => {
     const AllReadStates = ReadStateStore.getAllReadStates();
     const OnlyUnreadOrMentions = AllReadStates.filter((m) =>
       onlyMentions ? m._mentionCount : ReadStateStore.hasUnread(m.channelId),

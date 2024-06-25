@@ -3,6 +3,7 @@ import {
   React,
   channels as UltimateChannelStore,
   users as UltimateUserStore,
+  components as DiscordComponents,
 } from "replugged/common";
 import Modules from "../lib/requiredModules";
 import IconSwitch from "./IconSwitch";
@@ -21,11 +22,9 @@ export default <
   path: `${K}.${string}` | K;
 }) => {
   const {
-    DiscordComponents: {
-      PopoutList: { SearchBar, Divider },
-    },
-    IconUtils,
-  } = Modules;
+    PopoutList: { SearchBar, Divider },
+  } = DiscordComponents as Types.DiscordComponents;
+  const { IconUtils } = Modules;
   const [searchValue, setSearchValue] = React.useState([]);
   const filteredGuildsWithState = Object.values(UltimateChannelStore.getSortedPrivateChannels())
     .map((Channel: Types.Channel) =>
@@ -105,8 +104,8 @@ export default <
           note={User?.bio ?? Channel?.topic}
           icon={
             (Channel
-              ? (IconUtils.default.getChannelIconURL(Channel) as string)
-              : (IconUtils.default.getUserAvatarURL(User) as string)) ??
+              ? (IconUtils.getChannelIconURL(Channel) as string)
+              : (IconUtils.getUserAvatarURL(User) as string)) ??
             Utils.getAcronym(User?.globalName ?? User?.username ?? Channel?.name)
           }
           {...state}

@@ -1,7 +1,9 @@
 import { types } from "replugged";
 import { Store } from "replugged/dist/renderer/modules/common/flux";
+import { components } from "replugged/common";
 import GeneralDiscordTypes from "discord-types/general";
 import type HBCM from "./lib/HomeButtonContextMenuApi";
+
 export namespace Types {
   export import DefaultTypes = types;
   export type GenericModule = Record<string, DefaultTypes.AnyFunction>;
@@ -10,68 +12,42 @@ export namespace Types {
   export type Role = GeneralDiscordTypes.Role;
   export type User = GeneralDiscordTypes.User & { globalName?: string };
   export interface IconUtils {
-    DEFAULT_AVATARS: string[];
-    SUPPORTS_WEBP: boolean;
-    default: {
-      getAnimatableSourceWithFallback: DefaultTypes.AnyFunction;
-      getApplicationIconSource: DefaultTypes.AnyFunction;
-      getApplicationIconURL: DefaultTypes.AnyFunction;
-      getAvatarDecorationURL: DefaultTypes.AnyFunction;
-      getChannelIconSource: DefaultTypes.AnyFunction;
-      getChannelIconURL: DefaultTypes.AnyFunction;
-      getDefaultAvatarURL: (number: number) => string;
-      getEmojiURL: DefaultTypes.AnyFunction;
-      getGameAssetSource: DefaultTypes.AnyFunction;
-      getGameAssetURL: DefaultTypes.AnyFunction;
-      getGuildBannerSource: DefaultTypes.AnyFunction;
-      getGuildBannerURL: DefaultTypes.AnyFunction;
-      getGuildDiscoverySplashSource: DefaultTypes.AnyFunction;
-      getGuildDiscoverySplashURL: DefaultTypes.AnyFunction;
-      getGuildHomeHeaderSource: DefaultTypes.AnyFunction;
-      getGuildHomeHeaderURL: DefaultTypes.AnyFunction;
-      getGuildIconSource: DefaultTypes.AnyFunction;
-      getGuildIconURL: (Guild: Guild) => string;
-      getGuildMemberAvatarSource: DefaultTypes.AnyFunction;
-      getGuildMemberAvatarURL: DefaultTypes.AnyFunction;
-      getGuildMemberAvatarURLSimple: DefaultTypes.AnyFunction;
-      getGuildMemberBannerURL: DefaultTypes.AnyFunction;
-      getGuildSplashSource: DefaultTypes.AnyFunction;
-      getGuildSplashURL: DefaultTypes.AnyFunction;
-      getGuildTemplateIconSource: DefaultTypes.AnyFunction;
-      getGuildTemplateIconURL: DefaultTypes.AnyFunction;
-      getUserAvatarColor: DefaultTypes.AnyFunction;
-      getUserAvatarSource: DefaultTypes.AnyFunction;
-      getUserAvatarURL: DefaultTypes.AnyFunction;
-      getUserBannerURL: DefaultTypes.AnyFunction;
-      getVideoFilterAssetURL: DefaultTypes.AnyFunction;
-      hasAnimatedGuildIcon: DefaultTypes.AnyFunction;
-      isAnimatedIconHash: DefaultTypes.AnyFunction;
-      makeSource: DefaultTypes.AnyFunction;
-    };
+    getAnimatableSourceWithFallback: DefaultTypes.AnyFunction;
+    getApplicationIconSource: DefaultTypes.AnyFunction;
+    getApplicationIconURL: DefaultTypes.AnyFunction;
     getAvatarDecorationURL: DefaultTypes.AnyFunction;
+    getChannelIconSource: DefaultTypes.AnyFunction;
+    getChannelIconURL: DefaultTypes.AnyFunction;
+    getDefaultAvatarURL: (number: number) => string;
     getEmojiURL: DefaultTypes.AnyFunction;
+    getGameAssetSource: DefaultTypes.AnyFunction;
+    getGameAssetURL: DefaultTypes.AnyFunction;
+    getGuildBannerSource: DefaultTypes.AnyFunction;
+    getGuildBannerURL: DefaultTypes.AnyFunction;
+    getGuildDiscoverySplashSource: DefaultTypes.AnyFunction;
+    getGuildDiscoverySplashURL: DefaultTypes.AnyFunction;
+    getGuildHomeHeaderSource: DefaultTypes.AnyFunction;
+    getGuildHomeHeaderURL: DefaultTypes.AnyFunction;
+    getGuildIconSource: DefaultTypes.AnyFunction;
+    getGuildIconURL: (Guild: Guild) => string;
+    getGuildMemberAvatarSource: DefaultTypes.AnyFunction;
     getGuildMemberAvatarURL: DefaultTypes.AnyFunction;
     getGuildMemberAvatarURLSimple: DefaultTypes.AnyFunction;
     getGuildMemberBannerURL: DefaultTypes.AnyFunction;
+    getGuildSplashSource: DefaultTypes.AnyFunction;
+    getGuildSplashURL: DefaultTypes.AnyFunction;
+    getGuildTemplateIconSource: DefaultTypes.AnyFunction;
+    getGuildTemplateIconURL: DefaultTypes.AnyFunction;
+    getUserAvatarColor: DefaultTypes.AnyFunction;
+    getUserAvatarSource: DefaultTypes.AnyFunction;
     getUserAvatarURL: DefaultTypes.AnyFunction;
     getUserBannerURL: DefaultTypes.AnyFunction;
     getVideoFilterAssetURL: DefaultTypes.AnyFunction;
+    hasAnimatedGuildIcon: DefaultTypes.AnyFunction;
     isAnimatedIconHash: DefaultTypes.AnyFunction;
-    isAnimatedImageURL: DefaultTypes.AnyFunction;
-    isVideoAssetHash: DefaultTypes.AnyFunction;
+    makeSource: DefaultTypes.AnyFunction;
   }
-  export interface BigIntUtils {
-    add: DefaultTypes.AnyFunction;
-    combine: DefaultTypes.AnyFunction;
-    deserialize: DefaultTypes.AnyFunction;
-    equals: DefaultTypes.AnyFunction;
-    filter: DefaultTypes.AnyFunction;
-    getFlag: DefaultTypes.AnyFunction;
-    has: DefaultTypes.AnyFunction;
-    hasAny: DefaultTypes.AnyFunction;
-    invert: DefaultTypes.AnyFunction;
-    remove: DefaultTypes.AnyFunction;
-  }
+
   export interface ReadStateByChannelValue {
     ackMessageIdAtChannelSelect: null | string;
     ackPinTimestamp: number;
@@ -146,12 +122,6 @@ export namespace Types {
     addChangeListener: DefaultTypes.AnyFunction;
     removeChangeListener: DefaultTypes.AnyFunction;
   }
-  export interface GuildStore {
-    getGuild: (guildId: string) => Guild;
-    getGuildCount: DefaultTypes.AnyFunction;
-    getGuilds: DefaultTypes.AnyFunction;
-    isLoaded: DefaultTypes.AnyFunction;
-  }
   export interface AckUtils {
     ack: DefaultTypes.AnyFunction;
     ackChannel: DefaultTypes.AnyFunction;
@@ -212,7 +182,7 @@ export namespace Types {
       onClear?: () => void;
     }>;
   }
-  export interface DiscordComponents {
+  export type DiscordComponents = {
     AdvancedScroller: React.ComponentClass;
     AdvancedScrollerAuto: React.ComponentClass;
     AdvancedScrollerNone: React.ComponentClass;
@@ -222,14 +192,14 @@ export namespace Types {
     ScrollerAuto: React.ComponentClass;
     ScrollerNone: React.ComponentClass;
     ScrollerThin: React.ComponentClass;
-  }
+  } & typeof components;
+
   export interface Modules {
     loadModules?: () => Promise<void>;
     ReadStateStore?: ReadStateStore;
+    AckUtilsModules?: GenericModule;
     AckUtils?: AckUtils;
-    GuildStore?: GuildStore;
     IconUtils?: IconUtils;
-    DiscordComponents?: DiscordComponents;
   }
   export type Jsonifiable =
     | null

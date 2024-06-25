@@ -1,5 +1,9 @@
 import { settings } from "replugged";
-import { React } from "replugged/common";
+import {
+  React,
+  guilds as UltimateGuildStore,
+  components as DiscordComponents,
+} from "replugged/common";
 import Modules from "../lib/requiredModules";
 import IconSwitch from "./IconSwitch";
 import Utils from "../lib/utils";
@@ -17,14 +21,11 @@ export default <
   path: `${K}.${string}` | K;
 }) => {
   const {
-    DiscordComponents: {
-      PopoutList: { SearchBar, Divider },
-    },
-    GuildStore,
-    IconUtils,
-  } = Modules;
+    PopoutList: { SearchBar, Divider },
+  } = DiscordComponents as Types.DiscordComponents;
+  const { IconUtils } = Modules;
   const [searchValue, setSearchValue] = React.useState([]);
-  const filteredGuildsWithState = Object.values(GuildStore.getGuilds())
+  const filteredGuildsWithState = Object.values(UltimateGuildStore.getGuilds())
     .map((Guild: Types.Guild) => ({
       Guild,
       ...(Utils.useSetting(SettingManager, `${path}.${Guild.id}`, false as never) as {
@@ -62,7 +63,7 @@ export default <
           key={Guild.id} // Don't forget to add a unique key
           title={Guild.name}
           note={Guild.description}
-          icon={IconUtils.default.getGuildIconURL(Guild) ?? Utils.getAcronym(Guild.name)}
+          icon={IconUtils.getGuildIconURL(Guild) ?? Utils.getAcronym(Guild.name)}
           {...state}
         />
       ))}
