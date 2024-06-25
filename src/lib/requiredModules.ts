@@ -4,7 +4,7 @@ import Types from "../types";
 export const Modules: Types.Modules = {};
 
 Modules.loadModules = async (): Promise<void> => {
-  Modules.ReadStateStore ??= await webpack.getByStoreName<Types.ReadStateStore>("ReadStateStore");
+  Modules.ReadStateStore ??= webpack.getByStoreName<Types.ReadStateStore>("ReadStateStore");
   Modules.IconUtils ??= await webpack
     .waitForProps<Types.IconUtils>(["getUserAvatarURL"], {
       timeout: 10000,
