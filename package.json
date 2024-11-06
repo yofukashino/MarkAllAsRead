@@ -1,7 +1,7 @@
 {
-  "name": "show-hidden-channels",
+  "name": "mark-all-as-read",
   "version": "1.0.6",
-  "description": "A replugged plugin which displays all hidden Channels, which can't be accessed due to Role Restrictions, this won't allow you to read them (impossible).",
+  "description": "Get an option to mark everything as read by right clicking on the home button.",
   "engines": {
     "node": ">=14.0.0"
   },

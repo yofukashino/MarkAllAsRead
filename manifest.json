@@ -3,16 +3,16 @@
   "name": "MarkAllAsRead",
   "description": "Get an option to mark everything as read by right clicking on the home button.",
   "image": "https://i.imgur.com/EniZLUj.png",
-  "source": "https://github.com/YofukashiNo/MarkAllAsRead",
+  "source": "https://github.com/yofukashino/MarkAllAsRead",
   "author": {
     "name": "Nanakusa",
     "discordID": "1121961711080050780",
-    "github": "YofukashiNo"
+    "github": "yofukashino"
   },
   "version": "1.0.6",
   "updater": {
     "type": "github",
-    "id": "YofukashiNo/MarkAllAsRead"
+    "id": "yofukashino/MarkAllAsRead"
   },
   "license": "MIT",
   "type": "replugged-plugin",

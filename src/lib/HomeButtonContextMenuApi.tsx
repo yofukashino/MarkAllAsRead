@@ -31,7 +31,7 @@ export default class HomeButtonContextMenuApi {
     ));
   }
   static getAPI(): HomeButtonContextMenuApi {
-    window.HomeButtonContextMenuApi ??= new HomeButtonContextMenuApi();
-    return window.HomeButtonContextMenuApi;
+    window[Symbol.for("HomeButtonContextMenuApi")] ??= new HomeButtonContextMenuApi();
+    return window[Symbol.for("HomeButtonContextMenuApi")];
   }
 }
